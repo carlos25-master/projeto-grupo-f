@@ -1,7 +1,30 @@
+/*
+ * Esse programa tem como propósito ler o conteúdo de um arquivo .csv 
+ * (modelo: xx;yy;zz) que contenha informações de continente, país, cidade,
+ * latitude, longitude e população da cidade de localizações.
+ * 
+ * Sua saída consiste nas duas cidades das localizações cuja distância é a maior
+ * dentre todas da lista dentro do contexto do globo terrestre.
+ *
+ * Modo de uso:
+ *  java Distancias < Dados.csv
+ *  
+ * Opções / Flags:
+ *  C - Específica que apenas as linhas de tal continente devem 
+ *      ser avaliadas. (String)
+ *  P - Específica que apenas as linhas de tal país devem ser avaliadas. (String)
+ *  + - Específica que apenas as linhas cuja cidade tem população maior do que um
+ *      valor inteiro específico devem ser avaliadas. (int)
+ *  - - Específica que apenas as linhas cuja cidade tem população menor do que um *      valor inteiro específico devem ser avaliadas. (int) 
+ *
+ * Modo de uso com flags:
+ *  java Distancias P Brazil < Dados.csv 
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class projetoFinal {
+public class Distancias {
   public static void main(String[] args) throws Exception {
 
     // Validação das flags
@@ -96,12 +119,12 @@ public class projetoFinal {
     }
 
     // Calculando as distâncias
-    double maiorDistancia = 0;        // Maior distancia atual, quando falamos
-                                      // no contexto de execução do algoritmo.
+    double maiorDistancia = 0;      // Maior distancia atual, quando falamos
+                                    // no contexto de execução do algoritmo.
 
-    int indexCity1 = -1;              // O valor de -1 representa algo impossível
-    int indexCity2 = -1;              // para um índice de array, quer dizer que
-                                      // não sobrou cidades ou havia menos de 2.
+    int indexCity1 = -1;            // O valor de -1 representa algo impossível
+    int indexCity2 = -1;            // para um índice de array, quer dizer que
+                                    // não sobrou cidades ou havia menos de 2.
 
     for (int i = 0; i < cities.size(); i++) {
       for (int j = i+1; j < cities.size(); j++) {
@@ -132,7 +155,7 @@ public class projetoFinal {
 
   // Equação de Haverseno para calcular a distância entre dois pontos no globo.
   public static double distanciaViaHaverseno(double lat1, double lon1,
-      double lat2, double lon2) {
+                                            double lat2, double lon2) {
 
     final double RAIO_TERRESTRE = 6378.13;  // em KM
     double lat1Rad = Math.toRadians(lat1);  // Convertendo pra radianos
